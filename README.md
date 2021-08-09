@@ -10,5 +10,8 @@ Ubuntu and macOS | [![TravisCI](https://img.shields.io/badge/build-passing-brigh
 Windows          | [![AppVeyor](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://arduino-esp8266.readthedocs.io/en/latest/installing.html)
 
 
+We will use https://bscscan.com/myapikey for binance smart chain api.
+
+also we will serialize that json files using https://arduinojson.org/v6/assistant/
 
 ![Alt Text](media/charge.gif)
