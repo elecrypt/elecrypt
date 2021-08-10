@@ -9,6 +9,7 @@ Operating system | Status
 Ubuntu and macOS | [![TravisCI](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://arduino-esp8266.readthedocs.io/en/latest/installing.html)
 Windows          | [![AppVeyor](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://arduino-esp8266.readthedocs.io/en/latest/installing.html)
 
+This codes are compatible with esp8266 nodemcu 1.0 on Arduino board.media/esp8266nodemcu.png
 
 We will use https://bscscan.com/myapikey for binance smart chain api.
 
