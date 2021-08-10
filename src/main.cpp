@@ -1,7 +1,6 @@
-
-/*
+ /*
  * HTTPS Secured Client GET Request
- * Copyright (c) 2022, Yasin Aktimur
+ * Copyright (c) 2021, Yasin Aktimur
  * All rights reserved.
  * Connects to WiFi HotSpot. */
 
@@ -9,6 +8,7 @@
 #include <WiFiClientSecure.h>
 #include <ESP8266WebServer.h>
 #include <ESP8266HTTPClient.h>
+#include <ArduinoJson.h>
 
 /* Set these to your desired credentials. */
 const char *ssid = "yasinaktimur";  //ENTER YOUR WIFI SETTINGS
@@ -82,7 +82,7 @@ void loop() {
   ADCData = String(adcvalue);   //String to interger conversion
 
   //GET Data
-  Link = "/api?module=account&action=balance&address=ADDDDDDDRESSSSSSSSSSS&tag=latest&apikey=PKEYPKEYPKEYPKEYPKEYPKEYPKEYPKEYPKEYPKEYPKEYPKEY";
+  Link = "/api?module=account&action=balance&address=ADDDDRSSSSSSSSSS&tag=latest&apikey=KEYKEYKEKYKEYKEYKEKYKEYKEYKEKYKEYKEYKEKYKEYKEYKEKY";
 
   Serial.print("requesting URL: ");
   Serial.println(host+Link);
@@ -107,9 +107,39 @@ void loop() {
   while(httpsClient.available()){
     line = httpsClient.readStringUntil('\n');  //Read Line by Line
     Serial.println(line); //Print response
+
+    // Stream& input;
+
+    StaticJsonDocument<128> doc;
+
+    DeserializationError error = deserializeJson(doc, line);
+
+    if (error) {
+      Serial.print(F("deserializeJson() failed: "));
+      Serial.println(error.f_str());
+      return;
+    }
+
+    const char* status = doc["status"]; // "1"
+    const char* message = doc["message"]; // "OK"
+    const char* result = doc["result"]; // "102273320000000000"
+
+
+
+    Serial.println("-*-*-*-*result-*-*-*-*-*-");
+    Serial.println(result);
+    if(result > 0) {
+      Serial.println("you can open led");
+      } else {
+        Serial.println("you can close led");
+        }
+    Serial.println("-*-*-*-*result-*-*-*-*-*-");
+
+
+
   }
   Serial.println("==========");
   Serial.println("closing connection");
 
-  delay(2000);  //GET Data at every 2 seconds
+  delay(10000);  //GET Data at every 10 seconds
 }
